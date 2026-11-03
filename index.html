@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap — Campus Peer Learning & Skill Exchange (v3)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>SkillSwap</h1>
+            <p>Campus Peer Learning & Skill Exchange</p>
+        </div>
+        <div class="badge-version">Prototype v3 · Research-Informed Edition</div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="nav-btn active" onclick="switchTab('seeker')">🔍 Looking for Help (Seeker Dashboard)</button>
+        <button class="nav-btn" onclick="switchTab('provider')">🤝 Post a Skill / Provider Dashboard</button>
+    </div>
+
+    <div class="main-layout">
+        <!-- Main Content Area -->
+        <div class="content-panel">
+            
+            <!-- SEEKER VIEW -->
+            <div id="seekerView">
+                <h2>Explore Peer Requests & Study Buddies</h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Browse students looking for academic support or offering peer knowledge exchange using verified structured schedules.</p>
+                
+                <div class="filters">
+                    <select id="subjectFilter">
+                        <option value="all">All Subjects</option>
+                        <option value="cs">Computer Science & AI</option>
+                        <option value="math">Calculus & Stats</option>
+                        <option value="lang">Languages</option>
+                    </select>
+                    <input type="text" id="searchInput" placeholder="Search by course or student name...">
+                </div>
+
+                <div class="cards-grid">
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <div>
+                            <div class="card-header">
+                                <h3>Rohit Sharma</h3>
+                                <span class="tag seeking">Looking for Help</span>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Topic:</strong> Calculus I</p>
+                                <p><strong>Can Teach:</strong> Python Basics</p>
+                                <div class="time-badge">📅 Fri · 11:00 AM–1:00 PM</div>
+                            </div>
+                        </div>
+                        <button class="action-btn" onclick="openModal('Rohit Sharma', 'Calculus I', 'Fri · 11:00 AM–1:00 PM', 'rohit@university.edu')">Make the First Move</button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card">
+                        <div>
+                            <div class="card-header">
+                                <h3>Maya Chen</h3>
+                                <span class="tag offering">Offering Help</span>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Topic:</strong> Python Basics</p>
+                                <p><strong>Can Teach:</strong> Calculus I</p>
+                                <div class="time-badge">📅 Tue · 14:00 PM–16:00 PM</div>
+                            </div>
+                        </div>
+                        <button class="action-btn" onclick="openModal('Maya Chen', 'Python Basics', 'Tue · 14:00 PM–16:00 PM', 'maya@university.edu')">Make the First Move</button>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card">
+                        <div>
+                            <div class="card-header">
+                                <h3>Lucas Vance</h3>
+                                <span class="tag seeking">Looking for Help</span>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Topic:</strong> Advanced Statistics</p>
+                                <p><strong>Can Teach:</strong> German Conversation</p>
+                                <div class="time-badge">📅 Thu · 16:00 PM–18:00 PM</div>
+                            </div>
+                        </div>
+                        <button class="action-btn" onclick="openModal('Lucas Vance', 'Advanced Statistics', 'Thu · 16:00 PM–18:00 PM', 'lucas@university.edu')">Make the First Move</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROVIDER VIEW -->
+            <div id="providerView" style="display: none;">
+                <h2>Provider Dashboard & Skill Posting</h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Publish your availability with structured time blocks to avoid scheduling friction.</p>
+                
+                <form onsubmit="handlePostSubmit(event)">
+                    <div class="form-group">
+                        <label>Your Name & Major</label>
+                        <input type="text" placeholder="e.g. Urmila Yadav, Software Engineering" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Listing Objective</label>
+                        <select>
+                            <option>Looking for Help (Seeker)</option>
+                            <option>Offering Help (Provider)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Course / Subject Topic</label>
+                        <input type="text" placeholder="e.g. GUI Design & Usability" required>
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 15px;">
+                        <div style="flex: 1;">
+                            <label>Available Day</label>
+                            <select>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1;">
+                            <label>Structured Time Block</label>
+                            <select>
+                                <option>11:00 AM–1:00 PM</option>
+                                <option>14:00 PM–16:00 PM</option>
+                                <option>16:00 PM–18:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="action-btn">Publish Structured Listing</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Sidebar Guidelines -->
+        <div class="content-panel" style="height: fit-content;">
+            <h3 style="margin-top: 0;">Design Principles (v3)</h3>
+            <hr style="border:0; border-top: 1px solid var(--border-color); margin: 15px 0;">
+            <p style="font-size: 13px; line-height: 1.5;"><strong>1. Preply / Upwork Separation:</strong> Switch tabs above to experience tailored workflows for seekers versus providers.</p>
+            <p style="font-size: 13px; line-height: 1.5;"><strong>2. Structured Time-Blocks:</strong> Enforces exact day/time slots, eliminating vague "free sometimes" scheduling friction (P1 insight).</p>
+            <p style="font-size: 13px; line-height: 1.5;"><strong>3. Instant Micro-Feedback:</strong> Clicking connect triggers immediate status confirmations so users never wonder if their action worked (P2 insight).</p>
+        </div>
+    </div>
+
+    <!-- Interactive Modal for Micro-Feedback -->
+    <div class="modal-backdrop" id="connectModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <h3 id="modalTitle">Say hello</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">Review your icebreaker message before contacting.</p>
+            
+            <textarea id="icebreakerText" rows="4" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid var(--border-color); border-radius: 6px; box-sizing: border-box; font-size: 13px;"></textarea>
+            
+            <div style="display: flex; gap: 10px;">
+                <button class="action-btn" style="background: white; color: black; border: 1px solid var(--border-color);" onclick="copyMessage()">Copy message</button>
+                <button class="action-btn" onclick="triggerEmailClient()">Open email client</button>
+            </div>
+
+            <div class="feedback-banner" id="feedbackBanner">
+                🚀 Email app opening — your draft is ready to finish and send to <span id="targetEmail"></span>!
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
